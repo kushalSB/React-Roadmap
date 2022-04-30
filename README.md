@@ -14,7 +14,8 @@ Learning React essentials
 - [React Components](#react-components)
 - [Props](#props)
 - [State](#state)
-- [Create React App](#creating-react-app)
+- [React Basics and Working with Components](#react-basics-and-working-with-components)
+- [React State and Working with Events](#react-state-and-working-with-events)
 
 ## Why use React instead of normal JavaScript
 
@@ -395,7 +396,7 @@ class classComponent extends React.Component{
 
 Calls to setState are asynchronous i.e this.state won't reflect new values immediately after calling setState. This is done so that if both Parent and Child call setState during a click event, Child isn't re-rendered twice.
 
-## Creating React App
+## React Basics and Working With Components
 
 [Top](#quick-access)
 
@@ -406,3 +407,471 @@ npx create-react-app my-app
 cd my-app
 npm start
 ```
+
+This is it now we can work on our Project.
+
+### React Export and Import
+
+If we want to use a Component from file A in file B then, in file A we need to export that function and in file B we need to import that function.
+
+```
+//in fileA.js
+export default ComponentName;
+```
+
+```
+//in fileB.js
+import ComponentName from './fileA';
+```
+
+### JSX
+
+JSX is full form for JavaScript XML.
+
+It allows us to write HTML code in React. Where React changes our JSX to vanilla JS.
+
+All JSX must only have one root element for one return statement.
+
+```
+return (<div></div><div></div>); //Error
+return (<div><div></div><div></div></div>);//NoError
+```
+
+### CSS in JSX
+
+Use className instead of class
+
+```
+ <div className="theclassName"></div>
+```
+
+To import a css file use
+
+```
+import './filename.css';
+```
+
+Example of a static Component using css
+
+```
+import "./ExpenseItem.css";
+
+function ExpenseItem() {
+  return (
+    <div className="expense-item">
+      <div>July 11 1999</div>
+      <div className="expense-item__description">
+        <h2>Car Insurance</h2>
+      </div>
+      <div className="expense-item__price"> 249.67$</div>
+    </div>
+  );
+}
+export default ExpenseItem;
+
+```
+
+### JSX under the hood
+
+Consider the folowing JSX
+
+```
+return(
+  <div>
+  <h2>Lets ger started!</h2>
+  <Expenses items={expenses} />
+  </div>
+);
+```
+
+The React now transforms this JSX by doing:
+
+```
+return React.createElement(
+'div',
+{},
+React.createElement('h2',{},'Lets get Started!'),
+React.createElement(Expenses,{items:expenses})
+);
+```
+
+### Passing Data Via Props
+
+We can make components reusable by using props.
+
+```
+//App.js
+// import React, {Component} from 'react';
+import ExpenseItem from "./components/ExpenseItem";
+
+function App() {
+  const expenses = [
+    {
+      id: "e1",
+      title: "Car Inusrance",
+      amount: 294.6,
+      date: new Date(2021, 2, 12),
+    },
+    {
+      id: "e2",
+      title: "Grocery",
+      amount: 30,
+      date: new Date(2021, 2, 28),
+    },
+    {
+      id: "e3",
+      title: "Rent",
+      amount: 60,
+      date: new Date(2021, 2, 14),
+    },
+    {
+      id: "e4",
+      title: "Utensils",
+      amount: 40,
+      date: new Date(2021, 2, 16),
+    },
+  ];
+  return (
+    <div>
+      <h2>Let's get started!</h2>
+      <ExpenseItem
+        title={expenses[0].title}
+        amount={expenses[0].amount}
+        date={expenses[0].date}
+      ></ExpenseItem>
+      <ExpenseItem
+        title={expenses[1].title}
+        amount={expenses[1].amount}
+        date={expenses[1].date}
+      ></ExpenseItem>
+      <ExpenseItem
+        title={expenses[2].title}
+        amount={expenses[2].amount}
+        date={expenses[2].date}
+      ></ExpenseItem>
+      <ExpenseItem
+        title={expenses[3].title}
+        amount={expenses[3].amount}
+        date={expenses[3].date}
+      ></ExpenseItem>
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+```
+//ExpenseItem.js
+import "./ExpenseItem.css";
+
+function ExpenseItem(props) {
+  return (
+    <div className="expense-item">
+      <div>{props.date.toISOString()}</div>
+      <div className="expense-item__description">
+        <h2>{props.title}</h2>
+      </div>
+      <div className="expense-item__price"> {props.amount}$</div>
+    </div>
+  );
+}
+export default ExpenseItem;
+
+```
+
+### Adding normal JS logic to Components
+
+Here we add Logic for Date which is from Vanilla JS
+
+```
+//ExpenseItem.js
+import "./ExpenseItem.css";
+
+function ExpenseItem(props) {
+  const month = props.date.toLocaleString("en-US", { month: "long" });
+  const day = props.date.toLocaleString("en-US", { day: "2-digit" });
+  const year = props.date.getFullYear();
+
+  return (
+    <div className="expense-item">
+      <div>
+        <div>{month}</div>
+        <div>{day}</div>
+        <div>{year}</div>
+      </div>
+      <div className="expense-item__description">
+        <h2>{props.title}</h2>
+      </div>
+      <div className="expense-item__price"> {props.amount}$</div>
+    </div>
+  );
+}
+export default ExpenseItem;
+
+```
+
+### Splitting Components into multiple Components
+
+Change the above ExpenseItem to this
+
+```
+import "./ExpenseItem.css";
+
+import ExpenseDate from "./ExpenseDate";
+function ExpenseItem(props) {
+  return (
+    <div className="expense-item">
+      <ExpenseDate date={props.date} />
+      <div className="expense-item__description">
+        <h2>{props.title}</h2>
+      </div>
+      <div className="expense-item__price"> {props.amount}$</div>
+    </div>
+  );
+}
+export default ExpenseItem;
+```
+
+Now Create a new file ExpenseDate.js and ExpenseDate.css
+
+```
+//ExpenseDate.js
+import "./ExpenseDate.css";
+function ExpenseDate(props) {
+  const month = props.date.toLocaleString("en-US", { month: "long" });
+  const day = props.date.toLocaleString("en-US", { day: "2-digit" });
+  const year = props.date.getFullYear();
+
+  return (
+    <div className="expense-date">
+      <div className="expense-date__month">{month}</div>
+      <div className="expense-date__year">{year}</div>
+      <div className="expense-date__day">{day}</div>
+    </div>
+  );
+}
+export default ExpenseDate;
+```
+
+Here We split the ExpenseItem Component into ExpenseDate Component.
+
+- Notice We passed props that first initiated from App.js and funneled it to ExpenseDate.js
+
+### Concept of Composition
+
+The approach of buiding a UI from smaller building blocks is called composition.
+
+- We can have very specific components like ExpenseItem or ExpenseDate where every thing is very specific using. All these components are configured thorough props.
+
+- We can also have components where don't configure everything using props but instead we are able to pass content between the opening and closing tags of that component.
+
+- We can also create components that are shell components, they are used to avoid code duplication. Considering a style duplication we can create a shell component to reduce duplication.
+
+```
+//Card.js
+import "./Card.css";
+
+function Card(props) {
+  const classes = "card " + props.className;
+  return <div className={classes}>{props.children}</div>;
+}
+
+export default Card;
+
+```
+
+Lets understand the code above:
+
+- the Component of Card is created which has a variable classes.
+- classes takes the defualt class "card" and whatever class is passed from the parent.
+- It just returns a wrapped div whose inner html is the children of its parent.
+- In this way we created our own wrapper component or we can say our won tags with customized css.
+
+```
+//ExpenseItem.js
+import "./ExpenseItem.css";
+import Card from "./Card";
+
+import ExpenseDate from "./ExpenseDate";
+
+function ExpenseItem(props) {
+  return (
+    <Card className="expense-item">
+      <ExpenseDate date={props.date} />
+      <div className="expense-item__description">
+        <h2>{props.title}</h2>
+      </div>
+      <div className="expense-item__price"> {props.amount}$</div>
+    </Card>
+  );
+}
+export default ExpenseItem;
+
+```
+
+In the code above we just replaced the previous div with our custom Component Card.
+
+Similarly we reused this card in our Expenses.js file
+
+```
+ import Card from "./Card";
+import ExpenseItem from "./ExpenseItem";
+import "./Expenses.css";
+
+function Expenses(props) {
+  return (
+    <Card className="expenses">
+      <ExpenseItem
+        title={props.items[0].title}
+        amount={props.items[0].amount}
+        date={props.items[0].date}
+      />
+      <ExpenseItem
+        title={props.items[1].title}
+        amount={props.items[1].amount}
+        date={props.items[1].date}
+      />
+      <ExpenseItem
+        title={props.items[2].title}
+        amount={props.items[2].amount}
+        date={props.items[2].date}
+      />
+      <ExpenseItem
+        title={props.items[3].title}
+        amount={props.items[3].amount}
+        date={props.items[3].date}
+      />
+    </Card>
+  );
+}
+
+export default Expenses;
+
+```
+
+Thus we can reduce code duplication using Composition,
+
+Note:
+
+- Custom component by default only use the css that is defined in the component.
+- To use other css we need to pass it as className and add that using props.className in our component className.
+- We also need to pass {props.children} if we want to create a wrapper otherwise the children inside` <Card> </CARD>` wont get transferred
+
+### Arrow Function (Vanilla JS)
+
+Functions can be written as arrow function
+
+```
+const App=()=>{}
+```
+
+## React State and Working with Events
+
+[Top](#quick-access)
+
+Upto now we have created components that are displayed as UI but, they are static i.e they don't intereact with user in any way as well as the content doesn't change.
+
+### Adding Event Listeiner
+
+```
+return (
+    <Card className="expense-item">
+      <ExpenseDate date={props.date} />
+      <div className="expense-item__description">
+        <h2>{props.title}</h2>
+      </div>
+      <div className="expense-item__price"> {props.amount}$</div>
+
+      <button onClick={() => console.log("Clicked!")}>Click me!</button>
+    </Card>
+  );
+```
+
+or
+
+```
+const ExpenseItem = (props) => {
+  const clickHandler = () => console.log("Clicked!");
+  return (
+    <Card className="expense-item">
+      <ExpenseDate date={props.date} />
+      <div className="expense-item__description">
+        <h2>{props.title}</h2>
+      </div>
+      <div className="expense-item__price"> {props.amount}$</div>
+
+      <button onClick={clickHandler}>Click me!</button>
+    </Card>
+  );
+};
+```
+
+### How component functions are Executed
+
+Consider the code below:
+
+```
+const ExpenseItem = (props) => {
+  let title = props.title;
+  const clickHandler = () => (title = "new Title");
+  return (
+    <Card className="expense-item">
+      <ExpenseDate date={props.date} />
+      <div className="expense-item__description">
+        <h2>{title}</h2>
+      </div>
+      <div className="expense-item__price"> {props.amount}$</div>
+
+      <button onClick={clickHandler}>Change Title</button>
+    </Card>
+  );
+};
+```
+
+- We might at first glance conclude that When the button is clicked, the clickHandler function is called, title is changed to "new title" and the component is changed to have new title.
+- But our above statement is only half-true, the title does change to "new Title" but the Component doesn't change its original title and renders the original value.
+
+- This is becuase our Component is also a function, the only special thing about this function is it returns JSX, so in our code above we didn't call the Component function again and this it didn't update the UI.
+- Now, how did the UI get rendered in the first place, i.e because when we use the Component in our Expenses.js
+
+```
+<ExpenseItem />
+```
+
+- This is same as calling the function, thus the UI was rendered the first time.
+- Notice, Using \<ExpenseItem someProp="something" /> is same as running React.createElement(ExpenseItem,{ someProp="something"},);
+
+### Using useState() to dynamically change title
+
+- useState() is a function in React i.e it needs to be first imported
+
+```
+import React, {useState} from 'react';
+```
+
+- useState() function takes in an argument which is the default state value, which means it will take an initial value. In our case the intital value is props.title
+
+```
+useState(props.title);
+```
+
+- As an output useState() returns an array, the first element returns a special variable, and the second element returns a function which we can use to change the value of the variable.
+- We can use array destructuring to store both the first and second element into variables or constants. we use constants in useState()
+
+```
+const [title,setTitle]= useState(props.title);
+```
+
+- Here title is the current state value and setTitle is a function for updating that value.
+
+- We can now use title in JSX like a normal varibale
+- To change value just use
+
+```
+setTitle('New Value');
+```
+
+- now title will hold new value and The component where the useState for setTitle was defined will be re-executed again by React.
+
