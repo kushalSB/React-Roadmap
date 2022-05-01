@@ -22,42 +22,43 @@ Learning React essentials
 - React can change UI based on state
 - Vanilla JS stores value in DOM
 
-```
+```jsx
 <input type="text" id="inputBox" />
 ```
 
-```
-const data=document.getElementById("inputBox").value;
+```jsx
+const data = document.getElementById("inputBox").value;
 ```
 
 - React stores value in variables
 
-```
+```jsx
 <input type="text" id="inputBox" value={data} />
 ```
 
-```
-const[data,setData] = useState("");
+```jsx
+const [data, setData] = useState("");
 ```
 
 - In vanilla JS code that alters a UI can be written anywhere without limitation either internally or within several files.
 - In React, the app in split into components and complete code (both display and updating mechanism) of each component is written at the same place.
 
-```
-function ItemList(userName){
-    function addItem(){//Update Mechanism
-
-        //code to add item
-    }
-    return(//Display code
-        <div>
-            <h1>ItemList</h1>
-            <ul>
-                <li>Item1</li>
-                <li>Item2</li>
-            </ul>
-        </div>
-    )
+```jsx
+function ItemList(userName) {
+  function addItem() {
+    //Update Mechanism
+    //code to add item
+  }
+  return (
+    //Display code
+    <div>
+      <h1>ItemList</h1>
+      <ul>
+        <li>Item1</li>
+        <li>Item2</li>
+      </ul>
+    </div>
+  );
 }
 ```
 
@@ -67,7 +68,7 @@ function ItemList(userName){
   - Traversal to the DOM to find the new values
   - Traversal to the DOM again to update the new values.
 
-    ```
+    ```jsx
     <input type="text" id="item-input" placeholder="Enter item name" /><button id="add-buttom">Add</button>
 
     <! Display Area>
@@ -75,19 +76,19 @@ function ItemList(userName){
     </ul>
     ```
 
-    ```
-    const addButton = document.getElementById(add-button);
-    addButton.addEventListener("click",function(){
-         //Selecting item
-         const item=document.getGetElemetById("item-input");
+    ```jsx
+    const addButton = document.getElementById(add - button);
+    addButton.addEventListener("click", function () {
+      //Selecting item
+      const item = document.getGetElemetById("item-input");
 
-        //Display code
-        const list=document.getElementById("item-list");
-        const listItem= document.createElement("li");
-        const listText = document.createTextNode(item.value);
+      //Display code
+      const list = document.getElementById("item-list");
+      const listItem = document.createElement("li");
+      const listText = document.createTextNode(item.value);
 
-        listItem.appendChild(listText);
-        list.appendChild(listItem);
+      listItem.appendChild(listText);
+      list.appendChild(listItem);
     });
     ```
 
@@ -95,26 +96,26 @@ function ItemList(userName){
   - No event listiener is required a simple onclick attribute or similar attribute will suffice.
   - A variable that stores list of possible values which is mapped and displayed.
   - If the list is updated React will automatically detect it and display accordingly.
-    ```
+    ```jsx
     <input type="text" value={itemInput} />
     <button onclick={addItem}>AddItem </button>
     ```
-    ```
+    ```jsx
     //Creating list of items
-    const [items,setItems]= useState("item1", "item2", "item3");
+    const [items, setItems] = useState("item1", "item2", "item3");
     ```
-    ```
+    ```jsx
     //Displaying items
     <ul>
-        {items.map(item => (
-            <li>{item}</li>
-        ))}
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
     </ul>
     ```
-    ```
+    ```jsx
     //updating items
-    function addItem(){
-        setItems(...items, itemInput);
+    function addItem() {
+      setItems(...items, itemInput);
     }
     ```
 
@@ -136,8 +137,8 @@ They are simply a JS class or function which can<br>
 
 ### Displaying Components
 
-```
-ReactDOM.render(<ComponentName />, documentGetElementById('root'));
+```jsx
+ReactDOM.render(<ComponentName />, documentGetElementById("root"));
 ```
 
 The above code can be understood as:
@@ -147,7 +148,7 @@ The above code can be understood as:
 
 ### Functional Components
 
-```
+```jsx
 const functionalComponent () => <h1> Hi! </h1>;
 ```
 
@@ -158,11 +159,11 @@ The above code creats a simple Functional Component. It has the following proper
 
 ### Class Component
 
-```
-class classComponent extends React.components{
-    render(){
-        return <h1>Hi! </h1>;
-    }
+```jsx
+class classComponent extends React.components {
+  render() {
+    return <h1>Hi! </h1>;
+  }
 }
 ```
 
@@ -190,7 +191,7 @@ if not Use Functional Components.
 
 ### Composing Component
 
-```
+```jsx
 // image component
 const Image= () => <img src="something">;
 
@@ -225,10 +226,11 @@ ReactDOM.render(<UserProfile />, document.getElementById('root'));
 
 - Changing the prop object will re-render the component
 
-```
-const functionalComponent = props => <h1> Hello {props.name}!</h1>;
+```jsx
+const functionalComponent = (props) => <h1> Hello {props.name}!</h1>;
 ReactDOM.render(
-    <functionalComponent name={'kushal'} />, document.getElementById('root')
+  <functionalComponent name={"kushal"} />,
+  document.getElementById("root")
 );
 ```
 
@@ -243,7 +245,7 @@ Let us understand the code above:
 
 ### Props in a class component
 
-```
+```jsx
 class classComponent extends React.Component{
     render (){
         return <h1> Hello {this.props.name}</h1>;
@@ -264,14 +266,14 @@ In the above code
 - We set the default values and we dont need to explicitly pass the prop as an argument.
 - Passsing a attribute will overwrite the default component.
 
-```
-const functionalComponent = props => <h1>Hi {props.name}</h1>;
+```jsx
+const functionalComponent = (props) => <h1>Hi {props.name}</h1>;
 
-functionalComponent.defaultProps={
-    name:"User"
+functionalComponent.defaultProps = {
+  name: "User",
 };
 
-ReactDOM.render(<functionalComponent />, document.getElementById('root'));
+ReactDOM.render(<functionalComponent />, document.getElementById("root"));
 ```
 
 ## State
@@ -288,7 +290,6 @@ Since state increases complexity and reduces predictability it is preferable to 
 
 An interactive app does need states to function properly.
 
-State can only be used in a class Component.
 
 State is similar to props but unlike props it is private to the component.
 
@@ -305,7 +306,7 @@ class classComponent extends React.Component{
 };
 ```
 
-```
+```jsx
 //Adding state to class Component
 class classComponent extends Reacts.Component{
     constructor(props){
@@ -330,7 +331,7 @@ Understanding the code above:
 - Now to use states we need to first initialize it and this is done through the class constructor.
 - Notice the class constructor has argument props and it is then passed to super(). It is a must to add super() while using a constructor. Though passing props is optional.
 
-```
+```jsx
 constructor(){
     super();//This also works but is not recommended by React.
     ....
@@ -343,12 +344,12 @@ constructor(){
 
 - We can add as many properties to the state object as we like
 
-```
+```jsx
 this.state = {
-    name:'kushal',
-    age: 22,
-    faculty: 'Science and Technology',
-    programme: 'Bachelors'
+  name: "kushal",
+  age: 22,
+  faculty: "Science and Technology",
+  programme: "Bachelors",
 };
 ```
 
@@ -358,7 +359,7 @@ We use this.setState() method to change the state
 
 setState() schedules an update to component's state object. When the state changes, the components responds by re-rendering.
 
-```
+```jsx
 //Example code of using setState
 
 class classComponent extends React.Component{
@@ -376,7 +377,7 @@ class classComponent extends React.Component{
         changeColor ()=>{
             this.setState({prop2:'red'});
         }
-
+    }
         //render function
         render(){
             return (<div>
@@ -388,7 +389,7 @@ class classComponent extends React.Component{
             <button onClick={this.changeColor}>Change Color</button>
             </div>);
         }
-    }
+
 
 };
 
@@ -402,7 +403,7 @@ Calls to setState are asynchronous i.e this.state won't reflect new values immed
 
 To start your React app first we need to get Node.js, after which we can run the command in the terminal
 
-```
+```bash
 npx create-react-app my-app
 cd my-app
 npm start
@@ -414,14 +415,14 @@ This is it now we can work on our Project.
 
 If we want to use a Component from file A in file B then, in file A we need to export that function and in file B we need to import that function.
 
-```
+```jsx
 //in fileA.js
 export default ComponentName;
 ```
 
-```
+```jsx
 //in fileB.js
-import ComponentName from './fileA';
+import ComponentName from "./fileA";
 ```
 
 ### JSX
@@ -432,7 +433,7 @@ It allows us to write HTML code in React. Where React changes our JSX to vanilla
 
 All JSX must only have one root element for one return statement.
 
-```
+```jsx
 return (<div></div><div></div>); //Error
 return (<div><div></div><div></div></div>);//NoError
 ```
@@ -441,19 +442,19 @@ return (<div><div></div><div></div></div>);//NoError
 
 Use className instead of class
 
-```
- <div className="theclassName"></div>
+```jsx
+<div className="theclassName"></div>
 ```
 
 To import a css file use
 
-```
-import './filename.css';
+```jsx
+import "./filename.css";
 ```
 
 Example of a static Component using css
 
-```
+```jsx
 import "./ExpenseItem.css";
 
 function ExpenseItem() {
@@ -468,30 +469,29 @@ function ExpenseItem() {
   );
 }
 export default ExpenseItem;
-
 ```
 
 ### JSX under the hood
 
 Consider the folowing JSX
 
-```
-return(
+```jsx
+return (
   <div>
-  <h2>Lets ger started!</h2>
-  <Expenses items={expenses} />
+    <h2>Lets ger started!</h2>
+    <Expenses items={expenses} />
   </div>
 );
 ```
 
 The React now transforms this JSX by doing:
 
-```
+```jsx
 return React.createElement(
-'div',
-{},
-React.createElement('h2',{},'Lets get Started!'),
-React.createElement(Expenses,{items:expenses})
+  "div",
+  {},
+  React.createElement("h2", {}, "Lets get Started!"),
+  React.createElement(Expenses, { items: expenses })
 );
 ```
 
@@ -499,7 +499,7 @@ React.createElement(Expenses,{items:expenses})
 
 We can make components reusable by using props.
 
-```
+```jsx
 //App.js
 // import React, {Component} from 'react';
 import ExpenseItem from "./components/ExpenseItem";
@@ -559,10 +559,9 @@ function App() {
 }
 
 export default App;
-
 ```
 
-```
+```jsx
 //ExpenseItem.js
 import "./ExpenseItem.css";
 
@@ -578,14 +577,13 @@ function ExpenseItem(props) {
   );
 }
 export default ExpenseItem;
-
 ```
 
 ### Adding normal JS logic to Components
 
 Here we add Logic for Date which is from Vanilla JS
 
-```
+```jsx
 //ExpenseItem.js
 import "./ExpenseItem.css";
 
@@ -609,14 +607,13 @@ function ExpenseItem(props) {
   );
 }
 export default ExpenseItem;
-
 ```
 
 ### Splitting Components into multiple Components
 
 Change the above ExpenseItem to this
 
-```
+```jsx
 import "./ExpenseItem.css";
 
 import ExpenseDate from "./ExpenseDate";
@@ -636,7 +633,7 @@ export default ExpenseItem;
 
 Now Create a new file ExpenseDate.js and ExpenseDate.css
 
-```
+```jsx
 //ExpenseDate.js
 import "./ExpenseDate.css";
 function ExpenseDate(props) {
@@ -669,7 +666,7 @@ The approach of buiding a UI from smaller building blocks is called composition.
 
 - We can also create components that are shell components, they are used to avoid code duplication. Considering a style duplication we can create a shell component to reduce duplication.
 
-```
+```jsx
 //Card.js
 import "./Card.css";
 
@@ -679,7 +676,6 @@ function Card(props) {
 }
 
 export default Card;
-
 ```
 
 Lets understand the code above:
@@ -689,7 +685,7 @@ Lets understand the code above:
 - It just returns a wrapped div whose inner html is the children of its parent.
 - In this way we created our own wrapper component or we can say our won tags with customized css.
 
-```
+```jsx
 //ExpenseItem.js
 import "./ExpenseItem.css";
 import Card from "./Card";
@@ -708,15 +704,14 @@ function ExpenseItem(props) {
   );
 }
 export default ExpenseItem;
-
 ```
 
 In the code above we just replaced the previous div with our custom Component Card.
 
 Similarly we reused this card in our Expenses.js file
 
-```
- import Card from "./Card";
+```jsx
+import Card from "./Card";
 import ExpenseItem from "./ExpenseItem";
 import "./Expenses.css";
 
@@ -748,7 +743,6 @@ function Expenses(props) {
 }
 
 export default Expenses;
-
 ```
 
 Thus we can reduce code duplication using Composition,
@@ -763,8 +757,8 @@ Note:
 
 Functions can be written as arrow function
 
-```
-const App=()=>{}
+```jsx
+const App = () => {};
 ```
 
 ## React State and Working with Events
@@ -775,23 +769,23 @@ Upto now we have created components that are displayed as UI but, they are stati
 
 ### Adding Event Listeiner
 
-```
+```jsx
 return (
-    <Card className="expense-item">
-      <ExpenseDate date={props.date} />
-      <div className="expense-item__description">
-        <h2>{props.title}</h2>
-      </div>
-      <div className="expense-item__price"> {props.amount}$</div>
+  <Card className="expense-item">
+    <ExpenseDate date={props.date} />
+    <div className="expense-item__description">
+      <h2>{props.title}</h2>
+    </div>
+    <div className="expense-item__price"> {props.amount}$</div>
 
-      <button onClick={() => console.log("Clicked!")}>Click me!</button>
-    </Card>
-  );
+    <button onClick={() => console.log("Clicked!")}>Click me!</button>
+  </Card>
+);
 ```
 
 or
 
-```
+```jsx
 const ExpenseItem = (props) => {
   const clickHandler = () => console.log("Clicked!");
   return (
@@ -812,7 +806,7 @@ const ExpenseItem = (props) => {
 
 Consider the code below:
 
-```
+```jsx
 const ExpenseItem = (props) => {
   let title = props.title;
   const clickHandler = () => (title = "new Title");
@@ -874,4 +868,371 @@ setTitle('New Value');
 ```
 
 - now title will hold new value and The component where the useState for setTitle was defined will be re-executed again by React.
+
+- When the Component is re-executed the code below is re-run thus react knows of title, but react also keeps track of the state and if its first time it will take props.title as argument but if it is not first time executing, react will just give title the latest state as current state.
+
+```jsx
+const [title, setTitle] = useState(props.title);
+```
+
+### Adding Form inputs
+
+Simply add form in jsx and create a component
+-Here We created two components NewExpenses.js and ExpenseFrom.js
+
+```jsx
+import "./NewExpenses.css";
+import ExpenseForm from "./ExpenseForm";
+
+const NewExpenses = () => {
+  return (
+    <div className="new-expense">
+      <ExpenseForm />
+    </div>
+  );
+};
+
+export default NewExpenses;
+```
+
+```jsx
+import "./ExpenseForm.css";
+
+const ExpenseForm = () => {
+  return (
+    <form>
+      <div className="new-expense__controls">
+        <div className="new-expense__control">
+          <label>Title</label>
+          <input type="text" />
+        </div>
+        <div className="new-expense__control">
+          <label>Amount</label>
+          <input type="number" min="0.01" step="0.01" />
+        </div>
+        <div className="new-expense__control">
+          <label>Date</label>
+          <input type="date" min="2019-01-01" max="2022-12-31" />
+        </div>
+      </div>
+      <div className="new-expense__actions">
+        <button type="submit">Add Expense</button>
+      </div>
+    </form>
+  );
+};
+
+export default ExpenseForm;
+```
+
+Also change App.js to include the latest changes.
+
+```jsx
+return (
+  <div>
+    <NewExpenses />
+    <Expenses items={expenses} />
+  </div>
+);
+```
+
+### Listening to User Input
+
+- We can add native event listiner
+
+```jsx
+<input type="text" onChange={titleChangeHandler} />
+```
+
+- We also add a function inside the component
+
+```jsx
+const titleChangeHandler = (event) => {
+  console.log(event);
+};
+```
+
+- This function will automatically get an event object as argument, which will be useful for us.
+
+- The event object has one a target field. target points to the DOM element for which the event occured, in our case the input element.
+
+- And this input element in turn has a long list of properties that we can set including the value property.
+
+- We can use the value property to get the current value for the input
+
+```jsx
+const titleChangeHandler = (event) => {
+  console.log(event.target.value);
+};
+```
+
+### Working with Multiple States
+
+- We want to make sure that we store the value somewhere so that when the form is submitted, we can use that value.
+
+- We want to combine all the values into an object when the form overall is submitted.
+
+- One way of storing the value and making sure it survives even if the component function is re-executed is to use state.
+
+```jsx
+import "./ExpenseForm.css";
+import React, { useState } from "react";
+
+const ExpenseForm = () => {
+  const [enteredTitle, setEnteredTitle] = useState("");
+  const [enteredDate, setEnteredDate] = useState("");
+  const [enteredAmount, setEnteredAmount] = useState("");
+  const titleChangeHandler = (event) => {
+    setEnteredTitle(event.target.value);
+  };
+  const amountChangeHandler = (event) => {
+    setEnteredAmount(event.target.value);
+  };
+  const dateChangeHandler = (event) => {
+    setEnteredDate(event.target.value);
+  };
+
+  return (
+    <form>
+      <div className="new-expense__controls">
+        <div className="new-expense__control">
+          <label>Title</label>
+          <input type="text" onChange={titleChangeHandler} />
+        </div>
+        <div className="new-expense__control">
+          <label>Amount</label>
+          <input
+            type="number"
+            min="0.01"
+            step="0.01"
+            onChange={amountChangeHandler}
+          />
+        </div>
+        <div className="new-expense__control">
+          <label>Date</label>
+          <input
+            type="date"
+            min="2019-01-01"
+            max="2022-12-31"
+            onChange={dateChangeHandler}
+          />
+        </div>
+      </div>
+      <div className="new-expense__actions">
+        <button type="submit">Add Expense</button>
+      </div>
+    </form>
+  );
+};
+
+export default ExpenseForm;
+```
+
+### Using one State
+
+- We can use a single state to store data from all there fields by passing an object as argument to the state
+
+```jsx
+const [userInput, setUserInput] = useState({
+  enteredTitle: "",
+  enteredAmount: "",
+  enteredDate: "",
+});
+```
+
+- Here, the state name is now userInput and it has three properties.
+
+- To change the current calue of state we just call the setUserInput
+
+```jsx
+setUserInput({
+  ...userInput,
+  enteredTitle: event.target.value,
+});
+```
+
+- Here we must use the spread operator to first copy the previous state and then change the state of desired field.
+- If we didnt use the spread operator, the other properties of this object will be overwritten and cant be used.
+
+### Updating State that depends upon previous State
+
+- The code on the previous example:
+
+```jsx
+setUserInput({
+  ...userInput,
+  enteredTitle: event.target.value,
+});
+```
+
+- Our current state depends upon the previous state, but this is a bad practise, we should rather use prevState.
+
+```jsx
+setUserInput((prevState) => {
+  return { ...prevState, enteredTitle: event.target.value };
+});
+```
+
+- This done so becuase, reacts schedules an state update, thus using this latest code, our code will always use the latest previous state.
+
+### Handling Form Submission
+
+- If a button with type submit part of a form , the overall form will emit an event to which we can listien
+
+```jsx
+<form onSubmit={submitHandler}>
+```
+
+- By default the behavious of Webpage when a form is submitted the browser sends a request to the server and the page reloads
+- We want to stop this default behaviour and handle this form submission manually.
+
+```jsx
+const submitHandler = (event) => {
+  event.preventDefault();
+
+  const expenseData = {
+    title: enteredTitle,
+    amount: enteredAmount,
+    date: new Date(enteredDate),
+  };
+  console.log(expenseData);
+};
+```
+
+### Clearing the input Fields using two way binding
+
+- Two way binding is used such that some value in the DOM is consistent with the current state
+
+- Let us change the input field such that the value is reflected of the state.
+
+```jsx
+<input type="text" value={enteredTitle} onChange={titleChangeHandler} />
+```
+
+- Now to clear the input fields when the form is submitted
+
+```jsx
+const submitHandler = (event) => {
+  event.preventDefault();
+
+  const expenseData = {
+    title: enteredTitle,
+    amount: enteredAmount,
+    date: new Date(enteredDate),
+  };
+  console.log(expenseData);
+  setEnteredTitle("");
+  setEnteredDate("");
+  setEnteredAmount("");
+};
+```
+
+### Child-to-Parent Component
+
+- In the above component ExpenseForm.js we have collected data, but we dont need those collected data in ExpenseForm.js, we rather need to pass this data into NewExpenses.js and into App.js such that we can create an Expenses component using props from the collected data.
+
+- Notice we used onchange prop on a input component which is inside the ExpenseForm component, this pattern can be repeated in ourn own components as well.
+
+- We can create our own event props and pass functions as values and that will allow us to pass a function from a parent component to a child component and call that function from the child component.
+- As we have called a function defined in the parent component in the child component , we can pass data as arguments to that functions, in this way we can transfer data from child component to a parent component.
+
+- The code below is a function defined in NewExpenses.js
+
+```jsx
+import "./NewExpenses.css";
+import ExpenseForm from "./ExpenseForm";
+
+const NewExpenses = () => {
+  const saveExpenseDataHandler = (enteredExpenseData) => {
+    const expenseData = {
+      ...enteredExpenseData,
+      id: Math.random().toString(),
+    };
+    console.log(expenseData);
+  };
+  return (
+    <div className="new-expense">
+      <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
+    </div>
+  );
+};
+
+export default NewExpenses;
+```
+
+- Now we need to use this function in ExpenseForm.js and pass the collected data as arguments to this function.
+
+```jsx
+const ExpesneForm = (props) => {};
+```
+
+```jsx
+const submitHandler = (event) => {
+  event.preventDefault();
+
+  const expenseData = {
+    title: enteredTitle,
+    amount: enteredAmount,
+    date: new Date(enteredDate),
+  };
+  props.onSaveExpenseData(expenseData);
+  setEnteredTitle("");
+  setEnteredDate("");
+  setEnteredAmount("");
+};
+```
+
+- Now to get to the App.js We repeat this process
+
+```jsx
+//App.js
+const addExpenseHandler = (expense) => {
+  console.log("In App.js");
+  console.log(expense);
+};
+console.log(addExpenseHandler);
+
+return (
+  <div>
+    <NewExpenses onAddExpense={addExpenseHandler} />
+    <Expenses items={expenses} />
+  </div>
+);
+```
+
+- Also call the prop onAddExpense in NewExpenses.js
+
+```jsx
+//NewExpenses.js
+const saveExpenseDataHandler =  (enteredExpenseData) => { // This function is called in ExpenseForm.js with arguments enteredExpenseData
+    const expenseData = {
+      ...enteredExpenseData,
+      id: Math.random().toString(),
+    };
+    props.onAddExpense(expenseData); //Calling function defined in App.js with expenseData as argument
+```
+
+- Thus the user inputted data has now succefully reached App.js from which we can now transfet those data into any components we so desire.
+
+### Lifting State Up
+
+<table border=1>
+<tr>
+<th colspan=3> <center> /< App /> </center> </th>
+</tr>
+<tr><th> /< Expenses /> </th> <th>-----***-----</th> <th> /< NewExpenses /></th></tr>
+<tr><td>State Used Here </td><td></td><td>State Generated Here</td></tr>
+</table>
+
+- We generate our data in NewExpenses component
+- We need to use that data to create an Expense component
+- There is no direct connection between Expense component and NewExpenses component
+- We can only communicate from parent to child or child to parent
+- In such a case we need to utlize the closest parent component which has either direct or indirect access to both the components, in our case its the App.js component.
+
+- Lifting State up is passing data generated in NewExpenses.js to App.js, we did this in the previous section. eg. addExpenseHandler in App.js
+
+- We will now then transfer data in Expenes component.
+
+### Controlled vs Uncontrolled Component
 
