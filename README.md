@@ -2,22 +2,24 @@
 
 Learning React essentials
 
-## Learning Resources
+# Learning Resources
 
 - [Udemy](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)
 - [React vs vanilla JS](https://www.framer.com/blog/posts/react-vs-vanilla-js/)
 - [Components Basics](<https://medium.com/the-andela-way/understanding-react-components-37f841c1f3bb#:~:text=Components%20are%20the%20building%20blocks,(User%20Interface)%20should%20appear.>)
 
-## Quick Access
+# Quick Access
 
-- [Why use React instead of normal JavaScript](#why-use-react-instead-of-normal-javascript)
-- [React Components](#react-components)
-- [Props](#props)
-- [State](#state)
-- [React Basics and Working with Components](#react-basics-and-working-with-components)
-- [React State and Working with Events](#react-state-and-working-with-events)
+1. [Why use React instead of normal JavaScript](#why-use-react-instead-of-normal-javascript)
+2. [React Components](#react-components)
+3. [Props](#props)
+4. [State](#state)
+5. [React Basics and Working with Components](#react-basics-and-working-with-components)
+6. [React State and Working with Events](#react-state-and-working-with-events)
+7. [Rendering Lists and Rendering Conditional Content](#rendrering-lists-and-rendering-conditional-content)
+8. [Styling React Components](#styling-react-components)
 
-## Why use React instead of normal JavaScript
+# Why use React instead of normal JavaScript
 
 - React can change UI based on state
 - Vanilla JS stores value in DOM
@@ -119,7 +121,7 @@ function ItemList(userName) {
     }
     ```
 
-## React Components
+# React Components
 
 [Top](#quick-access)
 
@@ -129,13 +131,13 @@ They are simply a JS class or function which can<br>
 - Accept props(property) as input [optionally]
 - Return a React Element that describes how UI should appear.
 
-### How components are created and handled
+## How components are created and handled
 
 - React Script allows us to write Components.
 - ReactDOM Script allows us to place our components as well as work with them in the context of DOM.
 - Babel Script allows us to transpile ES6 to ES5 if there is limited browser support.
 
-### Displaying Components
+## Displaying Components
 
 ```jsx
 ReactDOM.render(<ComponentName />, documentGetElementById("root"));
@@ -146,7 +148,7 @@ The above code can be understood as:
 - We are using ReactDOM's render method to render the ComponentName element into the DOM in a container with the id of root.
 - We can change the container to be inside any other element as its child.
 
-### Functional Components
+## Functional Components
 
 ```jsx
 const functionalComponent () => <h1> Hi! </h1>;
@@ -157,7 +159,7 @@ The above code creats a simple Functional Component. It has the following proper
 - It is stateless i.e they do not hold or manage states.
 - It is presentational i.e all they do is output UI elements.
 
-### Class Component
+## Class Component
 
 ```jsx
 class classComponent extends React.components {
@@ -179,7 +181,7 @@ Class componets have following properties:
 
 Class Component though powerful have larger amount of markup thus using them unnecessarily will negatively affect performance, redability and testability.
 
-### When to use class vs function Components
+## When to use class vs function Components
 
 Use Class Componets if
 
@@ -189,7 +191,7 @@ Use Class Componets if
 
 if not Use Functional Components.
 
-### Composing Component
+## Composing Component
 
 ```jsx
 // image component
@@ -214,7 +216,7 @@ const UserProfile = () =>
 ReactDOM.render(<UserProfile />, document.getElementById('root'));
 ```
 
-## Props
+# Props
 
 [Top](#quick-access)
 
@@ -243,7 +245,7 @@ Let us understand the code above:
 - In this function, we pass the component and destination as argument.
 - In component argument we can pass all inputs as attributes to the component
 
-### Props in a class component
+## Props in a class component
 
 ```jsx
 class classComponent extends React.Component{
@@ -260,7 +262,7 @@ In the above code
 - in the render() function the part inside the return is what is displayed in the UI when the component is used.
 - The ReactDOM.render as usual is the actual function that displays the component.
 
-### Default Props
+## Default Props
 
 - Another way of passing props to our component
 - We set the default values and we dont need to explicitly pass the prop as an argument.
@@ -276,11 +278,11 @@ functionalComponent.defaultProps = {
 ReactDOM.render(<functionalComponent />, document.getElementById("root"));
 ```
 
-## State
+# State
 
 [Top](#quick-access)
 
-### What is a state?
+## What is a state?
 
 State is an object which is built-in to React Components. This is where we store property values that belog to the component. If the state object changes, the component is re-rendered.
 
@@ -290,12 +292,11 @@ Since state increases complexity and reduces predictability it is preferable to 
 
 An interactive app does need states to function properly.
 
-
 State is similar to props but unlike props it is private to the component.
 
 State in React is immutable i.e state should never be altered directly but changes to the state must be made to a copy of current version of state.
 
-### Adding State to a class
+## Adding State to a class
 
 ```
 //Creating a class Component
@@ -353,7 +354,7 @@ this.state = {
 };
 ```
 
-### Changing the state
+## Changing the state
 
 We use this.setState() method to change the state
 
@@ -397,7 +398,7 @@ class classComponent extends React.Component{
 
 Calls to setState are asynchronous i.e this.state won't reflect new values immediately after calling setState. This is done so that if both Parent and Child call setState during a click event, Child isn't re-rendered twice.
 
-## React Basics and Working With Components
+# React Basics and Working With Components
 
 [Top](#quick-access)
 
@@ -411,7 +412,7 @@ npm start
 
 This is it now we can work on our Project.
 
-### React Export and Import
+## React Export and Import
 
 If we want to use a Component from file A in file B then, in file A we need to export that function and in file B we need to import that function.
 
@@ -425,7 +426,7 @@ export default ComponentName;
 import ComponentName from "./fileA";
 ```
 
-### JSX
+## JSX
 
 JSX is full form for JavaScript XML.
 
@@ -438,7 +439,7 @@ return (<div></div><div></div>); //Error
 return (<div><div></div><div></div></div>);//NoError
 ```
 
-### CSS in JSX
+## CSS in JSX
 
 Use className instead of class
 
@@ -471,7 +472,7 @@ function ExpenseItem() {
 export default ExpenseItem;
 ```
 
-### JSX under the hood
+## JSX under the hood
 
 Consider the folowing JSX
 
@@ -495,7 +496,7 @@ return React.createElement(
 );
 ```
 
-### Passing Data Via Props
+## Passing Data Via Props
 
 We can make components reusable by using props.
 
@@ -579,7 +580,7 @@ function ExpenseItem(props) {
 export default ExpenseItem;
 ```
 
-### Adding normal JS logic to Components
+## Adding normal JS logic to Components
 
 Here we add Logic for Date which is from Vanilla JS
 
@@ -609,7 +610,7 @@ function ExpenseItem(props) {
 export default ExpenseItem;
 ```
 
-### Splitting Components into multiple Components
+## Splitting Components into multiple Components
 
 Change the above ExpenseItem to this
 
@@ -656,7 +657,7 @@ Here We split the ExpenseItem Component into ExpenseDate Component.
 
 - Notice We passed props that first initiated from App.js and funneled it to ExpenseDate.js
 
-### Concept of Composition
+## Concept of Composition
 
 The approach of buiding a UI from smaller building blocks is called composition.
 
@@ -753,7 +754,7 @@ Note:
 - To use other css we need to pass it as className and add that using props.className in our component className.
 - We also need to pass {props.children} if we want to create a wrapper otherwise the children inside` <Card> </CARD>` wont get transferred
 
-### Arrow Function (Vanilla JS)
+## Arrow Function (Vanilla JS)
 
 Functions can be written as arrow function
 
@@ -761,13 +762,13 @@ Functions can be written as arrow function
 const App = () => {};
 ```
 
-## React State and Working with Events
+# React State and Working with Events
 
 [Top](#quick-access)
 
 Upto now we have created components that are displayed as UI but, they are static i.e they don't intereact with user in any way as well as the content doesn't change.
 
-### Adding Event Listeiner
+## Adding Event Listeiner
 
 ```jsx
 return (
@@ -802,7 +803,7 @@ const ExpenseItem = (props) => {
 };
 ```
 
-### How component functions are Executed
+## How component functions are Executed
 
 Consider the code below:
 
@@ -837,7 +838,7 @@ const ExpenseItem = (props) => {
 - This is same as calling the function, thus the UI was rendered the first time.
 - Notice, Using \<ExpenseItem someProp="something" /> is same as running React.createElement(ExpenseItem,{ someProp="something"},);
 
-### Using useState() to dynamically change title
+## Using useState() to dynamically change title
 
 - useState() is a function in React i.e it needs to be first imported
 
@@ -875,7 +876,7 @@ setTitle('New Value');
 const [title, setTitle] = useState(props.title);
 ```
 
-### Adding Form inputs
+## Adding Form inputs
 
 Simply add form in jsx and create a component
 -Here We created two components NewExpenses.js and ExpenseFrom.js
@@ -936,7 +937,7 @@ return (
 );
 ```
 
-### Listening to User Input
+## Listening to User Input
 
 - We can add native event listiner
 
@@ -966,7 +967,7 @@ const titleChangeHandler = (event) => {
 };
 ```
 
-### Working with Multiple States
+## Working with Multiple States
 
 - We want to make sure that we store the value somewhere so that when the form is submitted, we can use that value.
 
@@ -1028,7 +1029,7 @@ const ExpenseForm = () => {
 export default ExpenseForm;
 ```
 
-### Using one State
+## Using one State
 
 - We can use a single state to store data from all there fields by passing an object as argument to the state
 
@@ -1054,7 +1055,7 @@ setUserInput({
 - Here we must use the spread operator to first copy the previous state and then change the state of desired field.
 - If we didnt use the spread operator, the other properties of this object will be overwritten and cant be used.
 
-### Updating State that depends upon previous State
+## Updating State that depends upon previous State
 
 - The code on the previous example:
 
@@ -1075,7 +1076,7 @@ setUserInput((prevState) => {
 
 - This done so becuase, reacts schedules an state update, thus using this latest code, our code will always use the latest previous state.
 
-### Handling Form Submission
+## Handling Form Submission
 
 - If a button with type submit part of a form , the overall form will emit an event to which we can listien
 
@@ -1099,7 +1100,7 @@ const submitHandler = (event) => {
 };
 ```
 
-### Clearing the input Fields using two way binding
+## Clearing the input Fields using two way binding
 
 - Two way binding is used such that some value in the DOM is consistent with the current state
 
@@ -1127,7 +1128,7 @@ const submitHandler = (event) => {
 };
 ```
 
-### Child-to-Parent Component
+## Child-to-Parent Component
 
 - In the above component ExpenseForm.js we have collected data, but we dont need those collected data in ExpenseForm.js, we rather need to pass this data into NewExpenses.js and into App.js such that we can create an Expenses component using props from the collected data.
 
@@ -1214,7 +1215,7 @@ const saveExpenseDataHandler =  (enteredExpenseData) => { // This function is ca
 
 - Thus the user inputted data has now succefully reached App.js from which we can now transfet those data into any components we so desire.
 
-### Lifting State Up
+## Lifting State Up
 
 <table border=1>
 <tr>
@@ -1234,5 +1235,427 @@ const saveExpenseDataHandler =  (enteredExpenseData) => { // This function is ca
 
 - We will now then transfer data in Expenes component.
 
-### Controlled vs Uncontrolled Component
+## Controlled vs Uncontrolled Component
 
+- In a controlled component, form data is handled by a React component.
+
+- Uncontrolled components, where form data is handled by the DOM itself.
+
+# Rendrering Lists and Rendering Conditional Content
+
+[Top](#quick-access)
+
+## Using map()
+
+- Every Array of vanilla JS has a special method called map()
+
+- What map does is it creates a new array based on another array and transforms every element in the original array.
+- Example:
+
+```jsx
+const array1 = [1, 2, 3, 4, 5];
+
+const map1 = array1.map((x) => x * 2);
+console.log(map1);
+//Expected outcome: Array [2,4,6,8,10]
+```
+
+- So map takes in as argument a function which will change each element accordingly.
+
+## Array of JSX
+
+- If an array of JSX elements is part of JSX code i.e
+
+```jsx
+return <div>{[<Card />, <Card />]}</div>;
+```
+
+- React will simply render the elements side by side.
+
+## Rendering lists as data
+
+- Now we can use both the concept of map and the the way a array of jsx is rendered, we can dynamically render lists.
+
+```jsx
+//Expenses.jsx
+return (
+  <div>
+    <Card className="expenses">
+      <ExpensesFilter
+        selected={filteredYear}
+        onChangeFilter={filterChangeHandler}
+      />
+      {props.items.map((expense) => (
+        <ExpenseItem
+          title={expense.title}
+          amount={expense.amount}
+          date={expense.date}
+        />
+      ))}
+    </Card>
+  </div>
+);
+```
+
+- here items is an array that is passed as prop from the parent, now we can use map() on items.
+- map() takes in a function as argument, thus we have created a anonymous arrow function where expense is each element of items array.
+- The function creates ExpenseItem component with values from the prop items array.
+
+## Using Stateful Lists
+
+- Notice in the [previous section](#lifting-state-up) we were able to transfer data from ExpenseForm Component to App component, now we want to use that data to Create more ExpenseItem component.
+
+- Our Data for ExpenseItem component is stored in expenses array at App.js which is transferred as items as a prop to Expense.js to create ExpenseItem.
+
+- But simply adding the new data Recieved from Expenseform to the expenses Array won't work as React won't re-render values changed in a variable or array.
+
+- For this we need to create a state array such that react will rerender if expenses is changed.
+
+```jsx
+import Expenses from "./components/Expenses/Expenses";
+import NewExpenses from "./components/NewExpenses/NewExpenses";
+import React, { useState } from "react";
+
+const App = () => {
+  const DUMMY_EXPENSES = [
+    {
+      id: "e1",
+      title: "Toilet Paper",
+      amount: 94.12,
+      date: new Date(2020, 7, 14),
+    },
+    { id: "e2", title: "New TV", amount: 799.49, date: new Date(2021, 2, 12) },
+    {
+      id: "e3",
+      title: "Car Insurance",
+      amount: 294.67,
+      date: new Date(2021, 2, 28),
+    },
+    {
+      id: "e4",
+      title: "New Desk (Wooden)",
+      amount: 450,
+      date: new Date(2021, 5, 12),
+    },
+  ];
+
+  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+
+  const addExpenseHandler = (expense) => {
+    setExpenses((prevState) => {
+      console.log([expense, ...prevState]);
+      return [expense, ...prevState];
+    });
+  };
+  return (
+    <div>
+      <NewExpenses onAddExpense={addExpenseHandler} />
+      <Expenses items={expenses} />
+    </div>
+  );
+};
+
+export default App;
+```
+
+## Understanding Keys
+
+- In the above code, when a new ExpenseItem is added, a new div is created but now every item is visited and updated according to order, i.e every item is overwritten
+- This creates performance issue
+- Also if one of the item inside had a stateful component , then a bug would occur
+- React as it is today, it simply will not not where a new item should be added, it simply counts the items and adds accordingly and overwrites everything to match UI.
+- To Help React identify individual item, we use the prop key,
+- as our every item has a unique id, we can pass id as key to the element.
+
+Thus our code becomes
+
+```jsx
+return (
+  <div>
+    <Card className="expenses">
+      <ExpensesFilter
+        selected={filteredYear}
+        onChangeFilter={filterChangeHandler}
+      />
+      {props.items.map((expense) => (
+        <ExpenseItem
+          key={expense.id}
+          title={expense.title}
+          amount={expense.amount}
+          date={expense.date}
+        />
+      ))}
+    </Card>
+  </div>
+);
+```
+
+## Filtering Content
+
+- The above code can be filtered according to year using the code below
+
+```jsx
+import React, { useState } from "react";
+import Card from "../UI/Card";
+import ExpenseItem from "./ExpenseItem";
+import "./Expenses.css";
+import ExpensesFilter from "./ExpensesFilter";
+
+const Expenses = (props) => {
+  const [filteredYear, setFilteredYear] = useState("2020");
+
+  const filterChangeHandler = (selectedYear) => {
+    // console.log(selectedYear);
+    setFilteredYear(selectedYear);
+  };
+  const filteredExpenese = props.items.filter((expense) => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
+  return (
+    <div>
+      <Card className="expenses">
+        <ExpensesFilter
+          selected={filteredYear}
+          onChangeFilter={filterChangeHandler}
+        />
+        {filteredExpenese.map((expense) => (
+          <ExpenseItem
+            key={expense.id}
+            title={expense.title}
+            amount={expense.amount}
+            date={expense.date}
+          />
+        ))}
+      </Card>
+    </div>
+  );
+};
+export default Expenses;
+```
+
+## Outputting Conditional Content
+
+- rendering different output under different condition.
+
+- The code below display No items if the year has no items
+
+```jsx
+import React, { useState } from "react";
+import Card from "../UI/Card";
+import ExpenseItem from "./ExpenseItem";
+import "./Expenses.css";
+import ExpensesFilter from "./ExpensesFilter";
+
+const Expenses = (props) => {
+  const [filteredYear, setFilteredYear] = useState("2020");
+
+  const filterChangeHandler = (selectedYear) => {
+    // console.log(selectedYear);
+    setFilteredYear(selectedYear);
+  };
+  const filteredExpenses = props.items.filter((expense) => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
+  return (
+    <div>
+      <Card className="expenses">
+        <ExpensesFilter
+          selected={filteredYear}
+          onChangeFilter={filterChangeHandler}
+        />
+        {filteredExpenses.length === 0 ? (
+          <p> No items here</p>
+        ) : (
+          filteredExpenses.map((expense) => (
+            <ExpenseItem
+              key={expense.id}
+              title={expense.title}
+              amount={expense.amount}
+              date={expense.date}
+            />
+          ))
+        )}
+      </Card>
+    </div>
+  );
+};
+export default Expenses;
+```
+
+- We have used a conditional statement above
+
+- We can also use the js trick of && operator where if the expression to the left of && is true the expression the right is executed.
+
+```jsx
+import React, { useState } from "react";
+import Card from "../UI/Card";
+import ExpenseItem from "./ExpenseItem";
+import "./Expenses.css";
+import ExpensesFilter from "./ExpensesFilter";
+
+const Expenses = (props) => {
+  const [filteredYear, setFilteredYear] = useState("2020");
+
+  const filterChangeHandler = (selectedYear) => {
+    // console.log(selectedYear);
+    setFilteredYear(selectedYear);
+  };
+  const filteredExpenses = props.items.filter((expense) => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
+
+  return (
+    <div>
+      <Card className="expenses">
+        <ExpensesFilter
+          selected={filteredYear}
+          onChangeFilter={filterChangeHandler}
+        />
+
+        {filteredExpenses.length === 0 && <p> No items here</p>}
+        {filteredExpenses.length > 0 &&
+          filteredExpenses.map((expense) => (
+            <ExpenseItem
+              key={expense.id}
+              title={expense.title}
+              amount={expense.amount}
+              date={expense.date}
+            />
+          ))}
+      </Card>
+    </div>
+  );
+};
+export default Expenses;
+```
+
+- Or we can also store JSX content in a varaiable.
+
+```jsx
+import React, { useState } from "react";
+import Card from "../UI/Card";
+import ExpenseItem from "./ExpenseItem";
+import "./Expenses.css";
+import ExpensesFilter from "./ExpensesFilter";
+
+const Expenses = (props) => {
+  const [filteredYear, setFilteredYear] = useState("2020");
+
+  const filterChangeHandler = (selectedYear) => {
+    // console.log(selectedYear);
+    setFilteredYear(selectedYear);
+  };
+  const filteredExpenses = props.items.filter((expense) => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
+
+  let expenseContent = <p> No items here</p>;
+  if (filteredExpenses.length > 0) {
+    expenseContent = filteredExpenses.map((expense) => (
+      <ExpenseItem
+        key={expense.id}
+        title={expense.title}
+        amount={expense.amount}
+        date={expense.date}
+      />
+    ));
+  }
+  return (
+    <div>
+      <Card className="expenses">
+        <ExpensesFilter
+          selected={filteredYear}
+          onChangeFilter={filterChangeHandler}
+        />
+        {expenseContent}
+      </Card>
+    </div>
+  );
+};
+export default Expenses;
+```
+
+## Adding Conditional return statement
+
+- if for a certain condition the entire jsx of a component can change we use conditional return.
+- Here we have created a component that displays filtered expenses and as that component can entirely be empty or have elements we can use condtional return
+
+```jsx
+import ExpenseItem from "./ExpenseItem";
+import "./ExpensesList.css";
+
+const ExpensesList = (props) => {
+  //   let expenseContent = <p> No items here</p>;
+  if (props.expenses.length === 0) {
+    return <h2 className="expense-list__fallback"> Found No Expenses.</h2>;
+  }
+  return (
+    <ul className="expenses-list">
+      {props.expenses.map((expense) => (
+        <ExpenseItem
+          key={expense.id}
+          title={expense.title}
+          amount={expense.amount}
+          date={expense.date}
+        />
+      ))}
+    </ul>
+  );
+};
+
+export default ExpensesList;
+```
+
+```jsx
+import React, { useState } from "react";
+import Card from "../UI/Card";
+// import ExpenseItem from "./ExpenseItem";
+import "./Expenses.css";
+import ExpensesFilter from "./ExpensesFilter";
+import ExpensesList from "./ExpensesList";
+
+const Expenses = (props) => {
+  const [filteredYear, setFilteredYear] = useState("2020");
+
+  const filterChangeHandler = (selectedYear) => {
+    // console.log(selectedYear);
+    setFilteredYear(selectedYear);
+  };
+  const filteredExpenses = props.items.filter((expense) => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
+
+  return (
+    <div>
+      <Card className="expenses">
+        <ExpensesFilter
+          selected={filteredYear}
+          onChangeFilter={filterChangeHandler}
+        />
+        <ExpensesList expenses={filteredExpenses} />
+      </Card>
+    </div>
+  );
+};
+export default Expenses;
+```
+
+## Adding dynamic style
+
+- We can use the style property to add dynamic style
+- style in react expects an object as its value
+- thus we require two curly braces, one for denoting it is jsx and another for object.
+
+```jsx
+style ={ {} }
+```
+
+- to add specific css property just use it as a property of an object.
+
+```jsx
+style = { { height:'100%'}}
+```
+
+# Styling React Components
+
+[Top](#quick-access)
